@@ -20,6 +20,20 @@ export const metadata: Metadata = {
   authors: [{ name: "My Prophetic Journal Team" }],
   creator: "My Prophetic Journal",
   publisher: "My Prophetic Journal",
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: "My Prophetic Journal - Spiritual Journaling App",
     description: "Capture, track, and discover God's voice in your life. The spiritual journaling app that helps you recognize patterns, connect with scripture, and grow in your prophetic gifting.",
