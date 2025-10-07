@@ -1,36 +1,161 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Prophetic Journal - Landing Page
+
+A modern, conversion-optimized landing page for "My Prophetic Journal" - a spiritual journaling app that helps believers track prophetic words, visions, dreams, and spiritual insights.
+
+## Features
+
+### 🎨 Design & UX
+- **Modern, responsive design** with mobile-first approach
+- **Brand-consistent color scheme** with spiritual-focused aesthetics
+- **Smooth animations** and hover effects
+- **Dark mode support** with automatic system preference detection
+- **Accessible design** with proper semantic HTML and ARIA labels
+
+### 📱 Landing Page Sections
+1. **Hero Section** - Compelling headline with app store badges and social proof
+2. **Social Proof** - User testimonials, ratings, and community stats  
+3. **Features Showcase** - 5 key features with interactive cards and mockups
+4. **How It Works** - 3-step process with biblical foundation
+5. **Premium Pricing** - Free vs Premium comparison with clear value props
+6. **Community & Teams** - Team collaboration features and testimonials
+7. **Security & Privacy** - Trust indicators and compliance certifications
+8. **Footer** - Final CTA, links, and contact information
+
+### 🛠 Technical Stack
+- **Next.js 15** with App Router
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **Custom CSS variables** for brand colors
+- **Responsive design** with mobile-first approach
+- **SEO optimized** with proper meta tags and structured data
+
+### 🎯 Key Features Highlighted
+- **Voice Recording & AI Transcription**
+- **Biblical References Integration** 
+- **Pattern Recognition & Analysis**
+- **Community & Team Collaboration**
+- **Security & Privacy First**
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
 
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd mpj-landing-page
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or  
+pnpm install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── HeroSection.tsx          # Main hero with CTA
+│   │   ├── SocialProofSection.tsx   # Testimonials & stats
+│   │   ├── FeaturesSection.tsx      # Core features showcase
+│   │   ├── HowItWorksSection.tsx    # 3-step process
+│   │   ├── PremiumSection.tsx       # Pricing & premium features
+│   │   ├── CommunitySection.tsx     # Team collaboration
+│   │   ├── SecuritySection.tsx      # Privacy & security
+│   │   └── Footer.tsx               # Footer with final CTA
+│   ├── globals.css                  # Global styles & CSS variables
+│   ├── layout.tsx                   # Root layout with metadata
+│   └── page.tsx                     # Main landing page
+```
 
-## Learn More
+## Brand Colors
 
-To learn more about Next.js, take a look at the following resources:
+```css
+--primary: #3385FF     /* Bright blue */
+--secondary: #018786   /* Dark teal */
+--tertiary: #5B9BD5    /* Softer blue */
+--accent: #E57373      /* Coral for voice features */
+--background: #FAFAFA  /* Light background */
+--foreground: #1C1C1C  /* Dark text */
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Messaging
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Primary Value Props:**
+  - "Never lose a prophetic word again"
+  - "Discover God's patterns in your life"  
+  - "Connect deeper with Scripture"
+  - "Grow with your spiritual community"
 
-## Deploy on Vercel
+- **Biblical Foundation:** John 16:13, 1 Corinthians 14:29
+- **Target Audience:** Christians, believers, prophetic communities
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Vercel (Recommended)
+1. Push to GitHub
+2. Connect repository to Vercel
+3. Deploy automatically
+
+### Other Platforms
+```bash
+npm run build
+npm start
+```
+
+## Performance
+
+- **Core Web Vitals optimized**
+- **Image optimization** with Next.js Image component
+- **Font optimization** with Google Fonts
+- **Lazy loading** for below-the-fold content
+- **Minimal JavaScript** for fast loading
+
+## SEO Features
+
+- **Semantic HTML** structure
+- **Meta tags** for social sharing
+- **Open Graph** tags for Facebook/Twitter
+- **Structured data** for search engines
+- **Sitemap** generation
+- **Proper heading hierarchy**
+
+## Browser Support
+
+- Chrome 90+
+- Firefox 88+  
+- Safari 14+
+- Edge 90+
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is proprietary and confidential.
