@@ -16,37 +16,44 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6 px-2 sm:px-0">
-              <span className="block sm:inline">Capture, Track, and{' '}</span>
-              <span className="text-primary block sm:inline">Share</span>{' '}
-              <span className="block sm:inline">God&apos;s Voice in Your Life</span>
+            <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6 px-2 sm:px-0">
+              <span className="text-primary">Your Prophetic Journal</span>
             </h1>
-            
-            <p className="text-base sm:text-lg md:text-xl text-foreground/80 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 px-2 sm:px-0">
-              The journaling app that helps you recognize patterns, connect with Scripture, 
-              and discern the Word of the Lord in community.
+
+            <p className="text-base sm:text-lg md:text-xl text-foreground/80 mb-6 sm:mb-6 max-w-2xl mx-auto lg:mx-0 px-2 sm:px-0">
+              Track God&apos;s voice, recognize patterns, and connect with Scripture in community.
             </p>
 
+            {/* Social Proof Badge */}
+            <div className="flex items-center justify-center lg:justify-start gap-2 mb-4 text-sm">
+              <div className="flex items-center bg-primary/10 text-primary px-4 py-2 rounded-full font-semibold">
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                </svg>
+                Join 300+ Believers
+              </div>
+            </div>
+
             {/* App Store Badges */}
-            <AppStoreButtons className="lg:justify-start mb-8" />
+            <AppStoreButtons className="lg:justify-start mb-6" />
 
 
             {/* Social Proof Numbers */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-8 mt-8 sm:mt-12 text-sm text-foreground/60">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">Growing</div>
-                <div>Global Community</div>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-8 mt-6 sm:mt-8 text-sm text-foreground/60">
+              <div className="text-center lg:text-left">
+                <div className="text-xl font-bold text-primary">5★ Rating</div>
+                <div className="text-xs">On App Stores</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">5★</div>
-                <div>App Store Rating</div>
+              <div className="text-center lg:text-left">
+                <div className="text-xl font-bold text-primary">Free Download</div>
+                <div className="text-xs">Start Journaling Today</div>
               </div>
             </div>
           </div>
 
           {/* Right Content - App Demo Video */}
           <div className="relative order-1 lg:order-2">
-            <div className="relative mx-auto max-w-xs sm:max-w-sm scale-75 sm:scale-80 lg:scale-80">
+            <div className="relative mx-auto max-w-[280px] sm:max-w-sm scale-90 sm:scale-80 lg:scale-80">
               {/* App Demo Video */}
               <div className="relative">
                 <video
