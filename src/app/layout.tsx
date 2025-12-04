@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "My Prophetic Journal - Spiritual Journaling App",
+  title: "My Prophetic Journal App - Never Forget",
   description: "Capture, track, and discover God's voice in your life. The spiritual journaling app that helps you recognize patterns, connect with scripture, and grow in your prophetic gifting.",
   keywords: ["prophetic journal app", "spiritual journaling", "Christian note-taking app", "prophetic words tracker", "biblical journaling app"],
   authors: [{ name: "My Prophetic Journal Team" }],
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "My Prophetic Journal - Spiritual Journaling App",
+    title: "My Prophetic Journal App - Never Forget",
     description: "Capture, track, and discover God's voice in your life. The spiritual journaling app that helps you recognize patterns, connect with scripture, and grow in your prophetic gifting.",
     url: "https://mypropheticjournal.com",
     siteName: "My Prophetic Journal",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "My Prophetic Journal - Spiritual Journaling App",
+    title: "My Prophetic Journal App - Never Forget",
     description: "Capture, track, and discover God's voice in your life. The spiritual journaling app that helps you recognize patterns, connect with scripture, and grow in your prophetic gifting.",
   },
 };
