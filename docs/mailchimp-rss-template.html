@@ -1,0 +1,144 @@
+<!--
+  My Prophetic Journal — Mailchimp RSS-to-Email template
+  ------------------------------------------------------
+  HOW TO USE
+  1. In Mailchimp: Create → Email → Automated → "Share blog updates" (RSS).
+  2. RSS feed URL: https://YOUR_DOMAIN/blog/rss.xml   (set the send schedule).
+  3. Template step → "Code your own" → "Paste in code" → paste this whole file.
+  4. Subject line (set in the campaign settings, NOT here):
+         Read Our New Post: *|RSSITEM:TITLE|*
+  5. Greeting + Facebook URL are already filled in below.
+  6. Confirm the two app review links are correct, send a test, then start.
+
+  Notes
+  - The post block sits inside *|RSSITEMS:|* … *|END:RSSITEMS|* so it renders
+    once per new post in the feed since the last send (usually one).
+  - *|UNSUB|* and *|HTML:LIST_ADDRESS_HTML|* are required by Mailchimp for
+    sending — leave them in the footer.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Prophetic Journal</title>
+</head>
+<body style="margin:0; padding:0; background:#f2f4f8; font-family:Helvetica,Arial,sans-serif; color:#15233f;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f4f8;">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background:#ffffff; border-radius:16px; overflow:hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:#0e1f45; padding:22px 32px;">
+              <span style="color:#ffffff; font-size:18px; font-weight:600; letter-spacing:-0.02em;">My Prophetic Journal</span>
+            </td>
+          </tr>
+
+          <!-- Greeting -->
+          <tr>
+            <td style="padding:32px 32px 8px 32px;">
+              <p style="margin:0; font-size:16px; line-height:1.6; color:#51607d;">
+                Grace and peace! We just published something new on the journal blog — we hope it encourages you in how you steward what God is speaking.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Post block (repeats per new post) -->
+          *|RSSITEMS:|*
+          <tr>
+            <td style="padding:16px 32px 8px 32px;">
+              <a href="*|RSSITEM:URL|*" style="text-decoration:none;">
+                <img src="*|RSSITEM:IMAGE|*" alt="" width="536" style="width:100%; max-width:536px; border-radius:12px; display:block;" />
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:16px 32px 0 32px;">
+              <a href="*|RSSITEM:URL|*" style="text-decoration:none; color:#15233f;">
+                <span style="font-size:24px; font-weight:700; line-height:1.2; letter-spacing:-0.02em;">*|RSSITEM:TITLE|*</span>
+              </a>
+              <p style="margin:6px 0 0 0; font-size:13px; color:#8b97ad; text-transform:uppercase; letter-spacing:0.08em;">
+                by *|RSSITEM:AUTHOR|*
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:14px 32px 0 32px;">
+              <p style="margin:0; font-size:16px; line-height:1.7; color:#51607d;">
+                *|RSSITEM:CONTENT_FULL|*
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:24px 32px 8px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="border-radius:999px; background:#2563eb;">
+                    <a href="*|RSSITEM:URL|*" style="display:inline-block; padding:14px 28px; font-size:16px; font-weight:600; color:#ffffff; text-decoration:none;">
+                      Read the full post →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          *|END:RSSITEMS|*
+
+          <!-- Divider -->
+          <tr>
+            <td style="padding:28px 32px 0 32px;">
+              <hr style="border:none; border-top:1px solid #e5e9f0; margin:0;" />
+            </td>
+          </tr>
+
+          <!-- Footer: Facebook + app reviews -->
+          <tr>
+            <td style="padding:24px 32px 4px 32px;" align="center">
+              <p style="margin:0 0 12px 0; font-size:15px; line-height:1.6; color:#51607d;">
+                Not following us yet?
+                <a href="https://www.facebook.com/profile.php?id=61579802603424" style="color:#2563eb; font-weight:600; text-decoration:none;">Follow My Prophetic Journal on Facebook</a>
+                for daily encouragement.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:8px 32px 8px 32px;" align="center">
+              <p style="margin:0 0 12px 0; font-size:15px; line-height:1.6; color:#51607d;">
+                Has the app been a blessing? A quick review helps others find it:
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" align="center">
+                <tr>
+                  <td style="padding:0 6px;">
+                    <a href="https://apps.apple.com/app/id6748415304?action=write-review" style="display:inline-block; padding:12px 20px; background:#0a1024; color:#ffffff; border-radius:10px; font-size:14px; font-weight:600; text-decoration:none;">
+                      Review on the App Store
+                    </a>
+                  </td>
+                  <td style="padding:0 6px;">
+                    <a href="https://play.google.com/store/apps/details?id=com.hizwayz.my_prophetic_journal" style="display:inline-block; padding:12px 20px; background:#0a1024; color:#ffffff; border-radius:10px; font-size:14px; font-weight:600; text-decoration:none;">
+                      Review on Google Play
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Legal / required by Mailchimp -->
+          <tr>
+            <td style="padding:24px 32px 32px 32px;" align="center">
+              <p style="margin:0; font-size:12px; line-height:1.6; color:#8b97ad;">
+                You're receiving this because you signed up at My Prophetic Journal.<br />
+                <a href="*|UNSUB|*" style="color:#8b97ad; text-decoration:underline;">Unsubscribe</a>
+                &nbsp;·&nbsp; *|HTML:LIST_ADDRESS_HTML|*
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

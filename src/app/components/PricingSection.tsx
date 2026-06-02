@@ -1,3 +1,5 @@
+import DownloadButton from "./DownloadButton";
+
 const Check = () => (
   <svg viewBox="0 0 24 24" fill="none">
     <path d="m5 12.5 4.5 4.5L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -25,9 +27,7 @@ const PricingSection = () => {
               <li><Check />Capture by type — dreams, visions, words</li>
               <li><Check />Zakar 5-day reminders</li>
             </ul>
-            <a href="#download" className="btn btn-outline">
-              Download Free
-            </a>
+            <DownloadButton className="btn btn-outline">Download Free</DownloadButton>
           </div>
 
           <div className="price-card popular reveal d1">
@@ -45,9 +45,7 @@ const PricingSection = () => {
               <li><Check />AI Scripture suggestions &amp; pattern insight</li>
               <li><Check />Prophetic Teams &amp; shared journals</li>
             </ul>
-            <a href="#download" className="btn btn-primary">
-              Start with Premium
-            </a>
+            <DownloadButton className="btn btn-primary">Start with Premium</DownloadButton>
           </div>
         </div>
       </div>

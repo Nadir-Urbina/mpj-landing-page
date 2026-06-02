@@ -35,3 +35,19 @@ export const allPostsQuery = `*[_type == "post" && defined(slug.current)] | orde
 export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0]{${CARD_FIELDS}, body}`;
 
 export const postSlugsQuery = `*[_type == "post" && defined(slug.current)]{ "slug": slug.current }`;
+
+export type Testimonial = {
+  _id: string;
+  quote: string;
+  name: string;
+  source?: string;
+  rating?: number;
+};
+
+export const testimonialsQuery = `*[_type == "testimonial"] | order(coalesce(order, 100) asc, _createdAt desc){
+  _id,
+  quote,
+  name,
+  source,
+  rating
+}`;
