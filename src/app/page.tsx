@@ -1,25 +1,29 @@
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
-import SocialProofSection from './components/SocialProofSection';
+import ProblemSection from './components/ProblemSection';
 import FeaturesSection from './components/FeaturesSection';
-import PremiumSection from './components/PremiumSection';
-import CommunitySection from './components/CommunitySection';
-import SecuritySection from './components/SecuritySection';
+import ReviewsSection from './components/ReviewsSection';
+import PricingSection from './components/PricingSection';
+import BlogSection from './components/BlogSection';
 import ContactSection from './components/ContactSection';
+import FinalCtaSection from './components/FinalCtaSection';
 import Footer from './components/Footer';
+import ScrollReveal from './components/ScrollReveal';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="mpj">
       <Header />
       <HeroSection />
-      <SocialProofSection />
+      <ProblemSection />
       <FeaturesSection />
-      <PremiumSection />
-      <CommunitySection />
-      <SecuritySection />
+      <ReviewsSection />
+      <PricingSection />
+      <BlogSection />
       <ContactSection />
+      <FinalCtaSection />
       <Footer />
+      <ScrollReveal />
     </div>
   );
 }

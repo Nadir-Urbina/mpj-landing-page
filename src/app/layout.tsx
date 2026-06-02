@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Spectral } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import "./globals.css";
 
@@ -13,9 +13,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const spectral = Spectral({
+  variable: "--font-spectral",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
-  title: "My Prophetic Journal App - Never Forget",
-  description: "Capture, track, and discover God's voice in your life. The spiritual journaling app that helps you recognize patterns, connect with scripture, and grow in your prophetic gifting.",
+  title: "My Prophetic Journal — Never Forget What God Has Spoken",
+  description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free to download on iOS and Android.",
   keywords: ["prophetic journal app", "spiritual journaling", "Christian note-taking app", "prophetic words tracker", "biblical journaling app"],
   authors: [{ name: "My Prophetic Journal Team" }],
   creator: "My Prophetic Journal",
@@ -35,8 +42,8 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "My Prophetic Journal App - Never Forget",
-    description: "Capture, track, and discover God's voice in your life. The spiritual journaling app that helps you recognize patterns, connect with scripture, and grow in your prophetic gifting.",
+    title: "My Prophetic Journal — Never Forget What God Has Spoken",
+    description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free to download on iOS and Android.",
     url: "https://mypropheticjournal.com",
     siteName: "My Prophetic Journal",
     locale: "en_US",
@@ -44,8 +51,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "My Prophetic Journal App - Never Forget",
-    description: "Capture, track, and discover God's voice in your life. The spiritual journaling app that helps you recognize patterns, connect with scripture, and grow in your prophetic gifting.",
+    title: "My Prophetic Journal — Never Forget What God Has Spoken",
+    description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free to download on iOS and Android.",
   },
 };
 
@@ -62,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spectral.variable} antialiased`}
       >
         {children}
         <Analytics />

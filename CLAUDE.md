@@ -51,6 +51,15 @@ The landing page (`src/app/page.tsx`) is composed of sequential section componen
 ### Path Aliases
 - `@/*` maps to `./src/*` (configured in tsconfig.json)
 
+### Blog (Sanity CMS)
+- Content is managed in Sanity. The embedded Studio is served at `/studio` (config in root `sanity.config.ts`, schema in `src/sanity/schemaTypes/`).
+- Frontend reads live in `src/sanity/lib/`: `client.ts` (null until configured), `fetch.ts` (`sanityFetch` wrapper with 60s ISR + graceful fallback), `queries.ts` (GROQ + types), `image.ts` (`urlForImage`).
+- Pages: `/blog` (index, `src/app/blog/page.tsx`) and `/blog/[slug]` (post, Portable Text via `portableComponents.tsx`). The homepage teaser (`BlogSection`) pulls the latest 3 posts and falls back to static placeholders when none exist.
+- Required env (see `.env.local.example`): `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`. The whole blog layer no-ops (placeholders / empty states) until these are set, so builds never break.
+
+### Contact form
+- `ContactSection` posts to `src/app/api/contact/route.ts`, which emails via Resend. Requires `RESEND_API_KEY`; the route returns a graceful 500 if it's missing.
+
 ## Brand Context
 
 **Target Audience:** Christians, believers, prophetic communities
