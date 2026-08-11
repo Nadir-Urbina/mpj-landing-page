@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useAppStoreLink, useIsDesktop } from '../hooks/usePlatform';
 import DownloadModal from './DownloadModal';
 
@@ -37,18 +38,18 @@ const Header = () => {
   return (
     <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
       <div className="mpj-container header-inner">
-        <a className="brand" href="/#top" aria-label="My Prophetic Journal home">
+        <Link className="brand" href="/#top" aria-label="My Prophetic Journal home">
           <span className="logo-mark" aria-hidden="true">
             <Image src="/mainLogo.png" alt="" width={40} height={40} />
           </span>
           <span className="wordmark">My Prophetic Journal</span>
-        </a>
+        </Link>
 
         <nav className="nav-links" aria-label="Primary">
           {NAV_LINKS.slice(0, 3).map((link) => (
-            <a key={link.name} href={link.href}>
+            <Link key={link.name} href={link.href}>
               {link.name}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -84,9 +85,9 @@ const Header = () => {
         <div className="mpj-container">
           <nav aria-label="Mobile">
             {NAV_LINKS.map((link) => (
-              <a key={link.name} href={link.href} onClick={() => setMenuOpen(false)}>
+              <Link key={link.name} href={link.href} onClick={() => setMenuOpen(false)}>
                 {link.name}
-              </a>
+              </Link>
             ))}
             <a
               href={appStoreLink}

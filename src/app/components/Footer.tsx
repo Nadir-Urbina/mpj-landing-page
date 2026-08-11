@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -11,11 +12,11 @@ const Footer = () => {
           <span className="wordmark">My Prophetic Journal</span>
         </div>
         <nav className="footer-nav" aria-label="Footer">
-          <a href="/#features">Features</a>
-          <a href="/#pricing">Pricing</a>
-          <a href="/#blog">Blog</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/#contact">Contact</a>
+          <Link href="/#features">Features</Link>
+          <Link href="/#pricing">Pricing</Link>
+          <Link href="/#blog">Blog</Link>
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/#contact">Contact</Link>
         </nav>
         <div className="footer-copy">© 2026 My Prophetic Journal</div>
       </div>
