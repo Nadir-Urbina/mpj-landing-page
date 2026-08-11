@@ -71,11 +71,11 @@ const ContactSection = () => {
                       support@mypropheticjournal.life
                     </a>
                   </h3>
-                  <p>We answer every message personally</p>
+                  <p>We will be happy to help you with any questions you have.</p>
                 </div>
               </div>
 
-              <div className="contact-info-card warm">
+              {/* <div className="contact-info-card warm">
                 <span className="ci-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
                     <circle cx="12" cy="12" r="9" />
@@ -86,7 +86,7 @@ const ContactSection = () => {
                   <h3>Within one business day</h3>
                   <p>Typical reply time, often much sooner</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 

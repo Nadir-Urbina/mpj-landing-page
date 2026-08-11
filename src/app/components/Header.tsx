@@ -6,10 +6,10 @@ import { useAppStoreLink, useIsDesktop } from '../hooks/usePlatform';
 import DownloadModal from './DownloadModal';
 
 const NAV_LINKS = [
-  { name: 'Features', href: '#features' },
-  { name: 'Pricing', href: '#pricing' },
-  { name: 'Blog', href: '#blog' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Features', href: '/#features' },
+  { name: 'Pricing', href: '/#pricing' },
+  { name: 'Blog', href: '/#blog' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 const Header = () => {
@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
       <div className="mpj-container header-inner">
-        <a className="brand" href="#top" aria-label="My Prophetic Journal home">
+        <a className="brand" href="/#top" aria-label="My Prophetic Journal home">
           <span className="logo-mark" aria-hidden="true">
             <Image src="/mainLogo.png" alt="" width={40} height={40} />
           </span>
