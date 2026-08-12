@@ -26,13 +26,19 @@ export type PostCard = {
 
 export type Post = PostCard & {
   body?: PortableTextBlock[];
+  /** Natural size of the cover asset, so the post hero can render uncropped. */
+  coverDimensions?: { width: number; height: number };
 };
 
 export const latestPostsQuery = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...$limit]{${CARD_FIELDS}}`;
 
 export const allPostsQuery = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc){${CARD_FIELDS}}`;
 
-export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0]{${CARD_FIELDS}, body}`;
+export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0]{
+  ${CARD_FIELDS},
+  body,
+  "coverDimensions": coverImage.asset->metadata.dimensions{width, height}
+}`;
 
 export const postSlugsQuery = `*[_type == "post" && defined(slug.current)]{ "slug": slug.current }`;
 

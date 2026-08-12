@@ -10,7 +10,7 @@ import { allPostsQuery, type PostCard } from "@/sanity/lib/queries";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Blog — My Prophetic Journal",
+  title: "Blog",
   description:
     "Practical encouragement for believers who take God's voice seriously — on dreams, discernment, and growing in your prophetic gifting.",
 };

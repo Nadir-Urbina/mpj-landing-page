@@ -21,9 +21,13 @@ const spectral = Spectral({
 });
 
 export const metadata: Metadata = {
-  title: "My Prophetic Journal — Never Forget What God Has Spoken",
-  description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free to download on iOS and Android.",
-  keywords: ["prophetic journal app", "spiritual journaling", "Christian note-taking app", "prophetic words tracker", "biblical journaling app"],
+  metadataBase: new URL("https://mypropheticjournal.com"),
+  title: {
+    default: "My Prophetic Journal — Christian Dream & Prophetic Journaling App",
+    template: "%s — My Prophetic Journal",
+  },
+  description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free Christian dream & prophetic journaling app for iOS and Android.",
+  keywords: ["Christian dream journal app", "prophetic journaling app", "prophetic words tracker", "spiritual journaling", "Christian note-taking app", "biblical journaling app", "dream journal for Christians"],
   authors: [{ name: "My Prophetic Journal Team" }],
   creator: "My Prophetic Journal",
   publisher: "My Prophetic Journal",
@@ -42,8 +46,8 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "My Prophetic Journal — Never Forget What God Has Spoken",
-    description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free to download on iOS and Android.",
+    title: "My Prophetic Journal — Christian Dream & Prophetic Journaling App",
+    description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free Christian dream & prophetic journaling app for iOS and Android.",
     url: "https://mypropheticjournal.com",
     siteName: "My Prophetic Journal",
     locale: "en_US",
@@ -51,14 +55,39 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "My Prophetic Journal — Never Forget What God Has Spoken",
-    description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free to download on iOS and Android.",
+    title: "My Prophetic Journal — Christian Dream & Prophetic Journaling App",
+    description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free Christian dream & prophetic journaling app for iOS and Android.",
   },
 };
 
 export const viewport = {
   width: "device-width",
   initialScale: 1,
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  name: "My Prophetic Journal",
+  applicationCategory: "LifestyleApplication",
+  operatingSystem: "iOS, Android",
+  url: "https://mypropheticjournal.com",
+  description:
+    "A Christian dream and prophetic journaling app to capture dreams, visions, and prophetic words, test them against Scripture, and discover the patterns God is revealing.",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    ratingCount: "500",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "My Prophetic Journal",
+  },
 };
 
 export default function RootLayout({
@@ -71,6 +100,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spectral.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         {children}
         <Analytics />
       </body>

@@ -349,30 +349,14 @@ section { position: relative; }
 
 /* Phone mockup ----------------------------------------------- */
 .hero-visual { display: flex; justify-content: center; align-items: center; }
-.phone {
-  position: relative;
-  width: 300px;
-  aspect-ratio: 300 / 620;
-  background: linear-gradient(160deg, #1c2540, #0d1426);
-  border-radius: 44px;
-  padding: 11px;
-  box-shadow: var(--shadow-lg), inset 0 0 0 1.5px rgba(255,255,255,0.10);
+.phone-mockup {
+  width: 320px;
+  max-width: 82vw;
+  height: auto;
   animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 30px 60px rgba(10,20,40,0.35));
 }
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
-.phone .notch {
-  position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
-  width: 120px; height: 26px; border-radius: 0 0 16px 16px;
-  background: #0a0f1d; z-index: 3;
-}
-.phone-screen {
-  width: 100%; height: 100%;
-  border-radius: 34px;
-  overflow: hidden;
-  background: var(--cream);
-  position: relative;
-}
-.phone-screen .phone-shot { width: 100%; height: 100%; object-fit: cover; }
 
 /* Striped placeholder screen */
 .screen-placeholder {
@@ -481,7 +465,7 @@ section { position: relative; }
 .feature-icon svg { width: 27px; height: 27px; }
 .feature-card h3 { font-size: 1.32rem; margin-bottom: 10px; font-weight: 600; letter-spacing: -0.022em; }
 .feature-card .feat-name { display: inline-flex; align-items: center; gap: 9px; }
-.zakar-tag {
+.feature-tag {
   font-family: var(--serif);
   font-style: italic;
   font-size: 0.95rem;
@@ -1023,6 +1007,64 @@ section { position: relative; }
 .blog-empty p { margin-top: 14px; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.55; }
 .blog-all { margin-top: 38px; text-align: center; }
 .blog-all .read-more { font-size: 1rem; }
+
+/* Contextual links out of feature cards / into sibling landing pages */
+.feature-link {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  margin-top: 18px;
+}
+.feature-link a {
+  font-size: 0.92rem; font-weight: 600; color: var(--royal);
+  transition: gap .2s ease, color .2s ease;
+}
+.feature-link a:hover { color: var(--navy-700); text-decoration: underline; }
+.page-crosslink {
+  max-width: 760px; margin: 34px auto 0;
+  text-align: center; font-size: 1rem; color: var(--ink-soft);
+}
+.page-crosslink a { color: var(--royal); font-weight: 600; }
+.page-crosslink a:hover { text-decoration: underline; }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq { background: var(--paper); }
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 2px; }
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 20px 24px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  flex: none;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--ink-faint);
+  transition: transform 0.2s ease;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p {
+  padding: 0 24px 20px;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+}
 
 /* ============================================================
    Custom scrollbar

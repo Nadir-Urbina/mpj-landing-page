@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import StoreButtons from './StoreButtons';
+import DownloadBadge from './DownloadBadge';
 
 const HeroSection = () => {
   return (
@@ -18,7 +18,7 @@ const HeroSection = () => {
           </p>
 
           <div id="download">
-            <StoreButtons className="reveal d2" />
+            <DownloadBadge className="reveal d2" />
           </div>
 
           <div className="social-badges reveal d3">
@@ -29,20 +29,14 @@ const HeroSection = () => {
         </div>
 
         <div className="hero-visual reveal d2">
-          <div className="phone" aria-label="App dashboard preview">
-            <span className="notch" />
-            <div className="phone-screen">
-              <Image
-                src="/MPJ Dashboard 6-1-26.png"
-                alt="My Prophetic Journal dashboard"
-                fill
-                sizes="300px"
-                className="phone-shot"
-                style={{ objectFit: 'cover' }}
-                priority
-              />
-            </div>
-          </div>
+          <Image
+            src="/remembrance moments no bg website.webp"
+            alt="My Prophetic Journal dashboard showing a Remembrance Moments reminder"
+            width={621}
+            height={1344}
+            className="phone-mockup"
+            priority
+          />
         </div>
       </div>
     </section>

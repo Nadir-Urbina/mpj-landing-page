@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const FeaturesSection = () => {
   return (
     <section className="features section-pad" id="features">
@@ -26,6 +28,10 @@ const FeaturesSection = () => {
               <span>Prophetic Word</span>
               <span>Scripture Revelation</span>
             </div>
+            <p className="feature-link">
+              <Link href="/prophetic-dream-journal-app">Dream journaling →</Link>
+              <Link href="/prophetic-words-app">Prophetic words →</Link>
+            </p>
           </div>
 
           <div className="feature-card reveal d1">
@@ -37,11 +43,15 @@ const FeaturesSection = () => {
               </svg>
             </div>
             <h3 className="feat-name">
-              The 5-day reminder <span className="zakar-tag">&ldquo;Zakar&rdquo;</span>
+              Remembrance Moments <span className="feature-tag">5-day</span>
             </h3>
             <p>
-              Inspired by the Hebrew call to remember, Zakar gently resurfaces your past notes over
-              five days. Nothing you receive gets buried and forgotten.
+              Inspired by the Hebrew call to remember &mdash; <em>zakar</em> &mdash; Remembrance
+              Moments gently resurfaces your past notes over five days. Nothing you receive gets
+              buried and forgotten.
+            </p>
+            <p className="feature-link">
+              <Link href="/features/remembrance-moments">What zakar means →</Link>
             </p>
           </div>
 

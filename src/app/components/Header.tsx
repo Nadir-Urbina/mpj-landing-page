@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useAppStoreLink, useIsDesktop } from '../hooks/usePlatform';
-import DownloadModal from './DownloadModal';
+import { DOWNLOAD_LINK } from '../lib/links';
 
 const NAV_LINKS = [
   { name: 'Features', href: '/#features' },
@@ -16,9 +15,6 @@ const NAV_LINKS = [
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const appStoreLink = useAppStoreLink();
-  const isDesktop = useIsDesktop();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -26,14 +22,6 @@ const Header = () => {
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const handleDownloadClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (isDesktop) {
-      e.preventDefault();
-      setShowModal(true);
-    }
-    setMenuOpen(false);
-  };
 
   return (
     <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
@@ -55,10 +43,9 @@ const Header = () => {
 
         <div className="header-cta">
           <a
-            href={appStoreLink}
+            href={DOWNLOAD_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={handleDownloadClick}
             className="btn btn-download-sm"
           >
             Download Free
@@ -90,19 +77,17 @@ const Header = () => {
               </Link>
             ))}
             <a
-              href={appStoreLink}
+              href={DOWNLOAD_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleDownloadClick}
               className="btn btn-download-sm"
+              onClick={() => setMenuOpen(false)}
             >
               Download Free
             </a>
           </nav>
         </div>
       </div>
-
-      <DownloadModal isOpen={showModal} onClose={() => setShowModal(false)} />
     </header>
   );
 };

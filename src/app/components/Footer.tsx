@@ -12,9 +12,11 @@ const Footer = () => {
           <span className="wordmark">My Prophetic Journal</span>
         </div>
         <nav className="footer-nav" aria-label="Footer">
-          <Link href="/#features">Features</Link>
+          <Link href="/prophetic-dream-journal-app">Dream Journal</Link>
+          <Link href="/prophetic-words-app">Prophetic Words</Link>
+          <Link href="/features/remembrance-moments">Remembrance Moments</Link>
           <Link href="/#pricing">Pricing</Link>
-          <Link href="/#blog">Blog</Link>
+          <Link href="/blog">Blog</Link>
           <Link href="/privacy">Privacy Policy</Link>
           <Link href="/#contact">Contact</Link>
         </nav>

@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - My Prophetic Journal",
+  title: "Privacy Policy",
   description: "Learn how My Prophetic Journal protects your spiritual content and personal data. Our privacy policy explains our commitment to treating your prophetic notes with reverence and respect.",
   openGraph: {
-    title: "Privacy Policy - My Prophetic Journal",
+    title: "Privacy Policy",
     description: "Learn how My Prophetic Journal protects your spiritual content and personal data.",
     url: "https://mypropheticjournal.com/privacy",
   },

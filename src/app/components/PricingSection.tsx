@@ -25,7 +25,7 @@ const PricingSection = () => {
             <ul className="price-list">
               <li><Check />Unlimited journal entries</li>
               <li><Check />Capture by type — dreams, visions, words</li>
-              <li><Check />Zakar 5-day reminders</li>
+              <li><Check />Remembrance Moments 5-day reminders</li>
             </ul>
             <DownloadButton className="btn btn-outline">Download Free</DownloadButton>
           </div>

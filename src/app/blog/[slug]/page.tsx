@@ -37,14 +37,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = await sanityFetch<Post | null>(postBySlugQuery, { slug }, null);
-  if (!post) return { title: "Post not found — My Prophetic Journal" };
+  if (!post) return { title: "Post not found" };
 
   const ogImage = post.coverImage
     ? urlForImage(post.coverImage).width(1200).height(630).fit("crop").url()
     : undefined;
 
   return {
-    title: `${post.title} — My Prophetic Journal`,
+    title: post.title,
     description: post.excerpt,
     openGraph: {
       title: post.title,
@@ -65,9 +65,14 @@ export default async function PostPage({
 
   if (!post) notFound();
 
+  // `fit("max")` scales down without cropping, so the whole cover is always
+  // visible whatever aspect ratio was uploaded. Fall back to 2:1 for older
+  // posts whose asset metadata isn't available.
   const cover = post.coverImage
-    ? urlForImage(post.coverImage).width(1280).height(640).fit("crop").url()
+    ? urlForImage(post.coverImage).width(1440).fit("max").url()
     : null;
+  const coverWidth = post.coverDimensions?.width ?? 1280;
+  const coverHeight = post.coverDimensions?.height ?? 640;
 
   return (
     <div className="mpj">
@@ -96,8 +101,8 @@ export default async function PostPage({
                 <Image
                   src={cover}
                   alt={post.coverImage?.alt || post.title}
-                  width={1280}
-                  height={640}
+                  width={coverWidth}
+                  height={coverHeight}
                   sizes="(max-width: 760px) 100vw, 720px"
                   priority
                 />
