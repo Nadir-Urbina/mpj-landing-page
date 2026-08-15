@@ -2,8 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { postSlugsQuery } from "@/sanity/lib/queries";
-
-const SITE_URL = "https://mypropheticjournal.com";
+import { SITE_URL } from "./lib/links";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const slugs = await sanityFetch<{ slug: string }[]>(postSlugsQuery, {}, []);

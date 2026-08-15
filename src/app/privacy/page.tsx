@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { SITE_URL } from '../lib/links';
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Privacy Policy",
     description: "Learn how My Prophetic Journal protects your spiritual content and personal data.",
-    url: "https://mypropheticjournal.com/privacy",
+    url: `${SITE_URL}/privacy`,
   },
 };
 

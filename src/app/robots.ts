@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://mypropheticjournal.com";
+import { SITE_URL } from "./lib/links";
 
 export default function robots(): MetadataRoute.Robots {
   return {

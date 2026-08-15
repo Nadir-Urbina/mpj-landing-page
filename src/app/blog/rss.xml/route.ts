@@ -1,14 +1,11 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allPostsQuery, type PostCard } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
+import { SITE_URL } from "@/app/lib/links";
 
 // Re-generate at most every 10 minutes; Mailchimp polls the feed on its own
 // (typically daily), so this is plenty fresh.
 export const revalidate = 600;
-
-const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://mypropheticjournal.com"
-).replace(/\/$/, "");
 
 function escapeXml(value: string): string {
   return value

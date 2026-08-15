@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import Header from "../../components/Header";
+import { SITE_URL } from "../../lib/links";
 import Footer from "../../components/Footer";
 import ScrollReveal from "../../components/ScrollReveal";
 import DownloadBadge from "../../components/DownloadBadge";
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     title: "Remembrance Moments — Zakar & Spiritual Stewardship",
     description:
       "What the Hebrew word zakar teaches about remembering, and how Remembrance Moments keeps what God said from being forgotten.",
-    url: "https://mypropheticjournal.com/features/remembrance-moments",
+    url: `${SITE_URL}/features/remembrance-moments`,
     type: "website",
   },
 };

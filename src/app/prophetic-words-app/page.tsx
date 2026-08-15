@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import Header from "../components/Header";
+import { SITE_URL } from "../lib/links";
 import Footer from "../components/Footer";
 import ScrollReveal from "../components/ScrollReveal";
 import DownloadBadge from "../components/DownloadBadge";
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     title: "Prophetic Words App — Track & Steward Prophecies",
     description:
       "Record the prophetic words spoken over your life, weigh them against Scripture, and watch for their fulfillment over time.",
-    url: "https://mypropheticjournal.com/prophetic-words-app",
+    url: `${SITE_URL}/prophetic-words-app`,
     type: "website",
   },
 };

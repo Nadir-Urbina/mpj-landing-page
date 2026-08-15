@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import Header from "../components/Header";
+import { SITE_URL } from "../lib/links";
 import Footer from "../components/Footer";
 import ScrollReveal from "../components/ScrollReveal";
 import DownloadBadge from "../components/DownloadBadge";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     title: "Prophetic Dream Journal App for Christians — My Prophetic Journal",
     description:
       "Log dreams and visions the moment you wake, test them against Scripture, and let Remembrance Moments gently remind you of what God has shown you.",
-    url: "https://mypropheticjournal.com/prophetic-dream-journal-app",
+    url: `${SITE_URL}/prophetic-dream-journal-app`,
     type: "website",
   },
 };

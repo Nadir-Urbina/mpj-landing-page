@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Spectral } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import "./globals.css";
+import { SITE_URL } from "./lib/links";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +22,7 @@ const spectral = Spectral({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mypropheticjournal.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "My Prophetic Journal — Christian Dream & Prophetic Journaling App",
     template: "%s — My Prophetic Journal",
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "My Prophetic Journal — Christian Dream & Prophetic Journaling App",
     description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free Christian dream & prophetic journaling app for iOS and Android.",
-    url: "https://mypropheticjournal.com",
+    url: SITE_URL,
     siteName: "My Prophetic Journal",
     locale: "en_US",
     type: "website",
@@ -71,7 +72,7 @@ const structuredData = {
   name: "My Prophetic Journal",
   applicationCategory: "LifestyleApplication",
   operatingSystem: "iOS, Android",
-  url: "https://mypropheticjournal.com",
+  url: SITE_URL,
   description:
     "A Christian dream and prophetic journaling app to capture dreams, visions, and prophetic words, test them against Scripture, and discover the patterns God is revealing.",
   offers: {
