@@ -44,6 +44,12 @@
   --gold:      #d8a25b;
   --gold-soft: #ecca94;
   --gold-deep: #b07f3c;
+  /* Rose accent (encourage button). --rose-deep is darkened from the base
+     --accent #E57373 to clear AA contrast on white for small text. */
+  --rose:      #e0777c;
+  --rose-soft: #f0c8ca;
+  --rose-deep: #b3474d;
+  --rose-tint: #fdf2f2;
 
   /* Light surfaces */
   --paper: #ffffff;
@@ -1007,6 +1013,33 @@ section { position: relative; }
 .blog-empty p { margin-top: 14px; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.55; }
 .blog-all { margin-top: 38px; text-align: center; }
 .blog-all .read-more { font-size: 1rem; }
+
+/* Blog post like button */
+.like-row {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 14px;
+  margin-top: 44px; padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.like-btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 10px 18px;
+  font-family: var(--sans); font-size: 0.94rem; font-weight: 600;
+  color: var(--rose-deep);
+  background: #fff;
+  border: 1.5px solid var(--rose-soft);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+}
+.like-btn svg { width: 19px; height: 19px; }
+.like-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--rose);
+  background: var(--rose-tint);
+}
+.like-btn.liked { color: var(--rose-deep); border-color: var(--rose); background: var(--rose-tint); }
+.like-btn:disabled { cursor: default; }
+.like-count { font-size: 0.92rem; color: var(--ink-faint); min-height: 1.2em; }
 
 /* Contextual links out of feature cards / into sibling landing pages */
 .feature-link {

@@ -11,6 +11,7 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Blog",
+  alternates: { canonical: "/blog" },
   description:
     "Practical encouragement for believers who take God's voice seriously — on dreams, discernment, and growing in your prophetic gifting.",
 };

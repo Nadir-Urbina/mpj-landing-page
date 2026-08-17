@@ -7,6 +7,7 @@ import { PortableText } from "@portabletext/react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ScrollReveal from "../../components/ScrollReveal";
+import LikeButton from "../../components/LikeButton";
 import { portableComponents } from "../portableComponents";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
@@ -44,8 +45,11 @@ export async function generateMetadata({
     : undefined;
 
   return {
-    title: post.title,
+    // Absolute: post titles are long enough that the site-name template would
+    // push them past Google's ~60-character display limit.
+    title: { absolute: post.title },
     description: post.excerpt,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -112,6 +116,7 @@ export default async function PostPage({
             {post.body && (
               <PortableText value={post.body} components={portableComponents} />
             )}
+            <LikeButton slug={slug} />
           </article>
         </div>
       </section>

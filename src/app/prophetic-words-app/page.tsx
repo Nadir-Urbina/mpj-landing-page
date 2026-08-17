@@ -10,7 +10,7 @@ import ReviewsSection from "../components/ReviewsSection";
 import FinalCtaSection from "../components/FinalCtaSection";
 
 export const metadata: Metadata = {
-  title: "Prophetic Words App — Track & Steward Prophecies",
+  title: { absolute: "Prophetic Words App — Track & Steward Prophecies" },
   description:
     "Record the prophetic words spoken over your life, weigh them against Scripture, and watch for their fulfillment over time. Free prophetic journaling app for iOS and Android.",
   alternates: { canonical: "/prophetic-words-app" },

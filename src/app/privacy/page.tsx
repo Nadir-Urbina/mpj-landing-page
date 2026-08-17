@@ -5,6 +5,7 @@ import { SITE_URL } from '../lib/links';
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
+  alternates: { canonical: "/privacy" },
   description: "Learn how My Prophetic Journal protects your spiritual content and personal data. Our privacy policy explains our commitment to treating your prophetic notes with reverence and respect.",
   openGraph: {
     title: "Privacy Policy",
@@ -248,7 +249,7 @@ export default function PrivacyPolicy() {
               </p>
               <div className="bg-muted/30 rounded-lg p-6 mb-4">
                 <p className="text-foreground/80 mb-2">
-                  <strong>Email:</strong> support@mypropheticjournal.com
+                  <strong>Email:</strong> support@mypropheticjournal.life
                 </p>
                 <p className="text-foreground/80 mb-2">
                   <strong>Response Time:</strong> We aim to respond within 48 hours

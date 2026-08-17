@@ -10,7 +10,7 @@ import ReviewsSection from "../../components/ReviewsSection";
 import FinalCtaSection from "../../components/FinalCtaSection";
 
 export const metadata: Metadata = {
-  title: "Remembrance Moments — Zakar & Spiritual Stewardship",
+  title: { absolute: "Remembrance Moments — What Zakar Means in Hebrew" },
   description:
     "What the Hebrew word zakar teaches about remembering, and how Remembrance Moments resurfaces your dreams and prophetic words over five days so nothing God said gets forgotten.",
   alternates: { canonical: "/features/remembrance-moments" },

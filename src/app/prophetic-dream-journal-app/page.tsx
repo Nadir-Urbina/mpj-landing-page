@@ -9,7 +9,7 @@ import ReviewsSection from "../components/ReviewsSection";
 import FinalCtaSection from "../components/FinalCtaSection";
 
 export const metadata: Metadata = {
-  title: "Prophetic Dream Journal App for Christians",
+  title: { absolute: "Prophetic Dream Journal App for Christians" },
   description:
     "Log dreams and visions the moment you wake, test them against Scripture, and let Remembrance Moments gently remind you of what God has shown you. Free Christian dream journal app for iOS and Android.",
   alternates: { canonical: "/prophetic-dream-journal-app" },

@@ -60,6 +60,12 @@ The landing page (`src/app/page.tsx`) is composed of sequential section componen
 ### Contact form
 - `ContactSection` posts to `src/app/api/contact/route.ts`, which emails via Resend. Requires `RESEND_API_KEY`; the route returns a graceful 500 if it's missing.
 
+### Blog post likes
+- `LikeButton` (on `/blog/[slug]`) calls `src/app/api/likes/[slug]/route.ts`; counts are stored in Upstash Redis via `src/app/lib/likes.ts`.
+- Required env: `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, plus optional `LIKES_IP_SALT` (salt for hashing visitor IPs). Note `.env.local.example` is gitignored by the `.env*` pattern, so these are documented here instead.
+- Unset env means `isLikesConfigured` is false and the button hides itself — the page still renders, matching the Sanity/Resend graceful-degradation pattern.
+- Abuse controls: slug must match `^[a-z0-9]+(?:-[a-z0-9]+)*$` (slugs become Redis keys), POST verifies the slug exists in Sanity, and dedupe uses a salted SHA-256 of the IP with a 30-day TTL (raw IPs are never stored).
+
 ## Brand Context
 
 **Target Audience:** Christians, believers, prophetic communities

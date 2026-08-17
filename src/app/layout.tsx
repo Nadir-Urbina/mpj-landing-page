@@ -23,8 +23,11 @@ const spectral = Spectral({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  // Titles are kept under ~60 characters so Google doesn't truncate them in
+  // search results. The template adds 23 chars, so page titles that need the
+  // full width set `title: { absolute: "..." }` to opt out of it.
   title: {
-    default: "My Prophetic Journal — Christian Dream & Prophetic Journaling App",
+    default: "My Prophetic Journal — Christian Dream Journal App",
     template: "%s — My Prophetic Journal",
   },
   description: "Capture your dreams, visions, and prophetic words — and discover the bigger story God is writing in your life. Free Christian dream & prophetic journaling app for iOS and Android.",
