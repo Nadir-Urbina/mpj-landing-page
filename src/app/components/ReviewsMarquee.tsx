@@ -3,6 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { Testimonial } from '@/sanity/lib/queries';
+import type { Locale } from '@/i18n/config';
+import { getDictionary, type Dictionary } from '@/i18n/dictionaries';
+
+type ReviewsText = Dictionary['reviews'];
 
 const CHAR_LIMIT = 170;
 
@@ -14,8 +18,8 @@ function clip(text: string): { text: string; truncated: boolean } {
   return { text: `${s.trimEnd()}…`, truncated: true };
 }
 
-const Stars = ({ rating }: { rating: number }) => (
-  <div className="review-stars" aria-label={`${rating} out of 5 stars`}>
+const Stars = ({ rating, t }: { rating: number; t: ReviewsText }) => (
+  <div className="review-stars" aria-label={t.stars(rating)}>
     {'★'.repeat(rating)}
   </div>
 );
@@ -34,10 +38,12 @@ const Meta = ({ t }: { t: Testimonial }) => (
 
 const ReviewCard = ({
   t,
+  text: copy,
   hidden,
   onOpen,
 }: {
   t: Testimonial;
+  text: ReviewsText;
   hidden?: boolean;
   onOpen: (t: Testimonial) => void;
 }) => {
@@ -45,7 +51,7 @@ const ReviewCard = ({
   const rating = t.rating ?? 5;
   return (
     <div className="review-card" aria-hidden={hidden || undefined}>
-      <Stars rating={rating} />
+      <Stars rating={rating} t={copy} />
       <p className="review-quote">{text}</p>
       {truncated && (
         <button
@@ -54,7 +60,7 @@ const ReviewCard = ({
           onClick={() => onOpen(t)}
           tabIndex={hidden ? -1 : 0}
         >
-          View more
+          {copy.viewMore}
         </button>
       )}
       <Meta t={t} />
@@ -62,7 +68,8 @@ const ReviewCard = ({
   );
 };
 
-const ReviewsMarquee = ({ reviews }: { reviews: Testimonial[] }) => {
+const ReviewsMarquee = ({ reviews, locale }: { reviews: Testimonial[]; locale: Locale }) => {
+  const copy = getDictionary(locale).reviews;
   const [active, setActive] = useState<Testimonial | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -97,14 +104,14 @@ const ReviewsMarquee = ({ reviews }: { reviews: Testimonial[] }) => {
         <button
           type="button"
           className="review-modal-close"
-          aria-label="Close"
+          aria-label={copy.close}
           onClick={() => setActive(null)}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
             <path d="M6 6 18 18M18 6 6 18" />
           </svg>
         </button>
-        <Stars rating={active.rating ?? 5} />
+        <Stars rating={active.rating ?? 5} t={copy} />
         <p className="review-quote review-quote-full">{active.quote}</p>
         <Meta t={active} />
       </div>
@@ -113,14 +120,14 @@ const ReviewsMarquee = ({ reviews }: { reviews: Testimonial[] }) => {
 
   return (
     <>
-      <div className="reviews-marquee reveal" aria-label="Reader testimonials">
+      <div className="reviews-marquee reveal" aria-label={copy.marqueeLabel}>
         <div className="reviews-track" style={{ animationDuration: `${duration}s` }}>
           {reviews.map((t) => (
-            <ReviewCard key={t._id} t={t} onOpen={setActive} />
+            <ReviewCard key={t._id} t={t} text={copy} onOpen={setActive} />
           ))}
           {/* Duplicate set for a seamless loop; hidden from assistive tech. */}
           {reviews.map((t) => (
-            <ReviewCard key={`dup-${t._id}`} t={t} hidden onOpen={setActive} />
+            <ReviewCard key={`dup-${t._id}`} t={t} text={copy} hidden onOpen={setActive} />
           ))}
         </div>
       </div>

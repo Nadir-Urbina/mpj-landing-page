@@ -12,6 +12,24 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "language",
+      title: "Language",
+      type: "string",
+      description:
+        "Which site this post belongs to. Spanish posts appear on /es/blog; English posts on /blog.",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Español", value: "es" },
+        ],
+        layout: "radio",
+        direction: "horizontal",
+      },
+      // Not required: posts saved before this field existed have no value and
+      // are treated as English by the site's queries.
+      initialValue: "en",
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
@@ -80,6 +98,11 @@ export const postType = defineType({
     },
   ],
   preview: {
-    select: { title: "title", subtitle: "category", media: "coverImage" },
+    select: { title: "title", category: "category", language: "language", media: "coverImage" },
+    prepare: ({ title, category, language, media }) => ({
+      title,
+      subtitle: [language === "es" ? "ES" : "EN", category].filter(Boolean).join(" · "),
+      media,
+    }),
   },
 });

@@ -1,20 +1,112 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { SITE_URL } from '../lib/links';
+import { SITE_URL } from '@/app/lib/links';
+import { localePath, ogLocale, pageAlternates, type Locale } from '@/i18n/config';
+import { PRIVACY_ES } from './privacy-es';
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  alternates: { canonical: "/privacy" },
-  description: "Learn how My Prophetic Journal protects your spiritual content and personal data. Our privacy policy explains our commitment to treating your prophetic notes with reverence and respect.",
-  openGraph: {
+type Props = { params: Promise<{ lang: Locale }> };
+
+const META = {
+  en: {
     title: "Privacy Policy",
-    description: "Learn how My Prophetic Journal protects your spiritual content and personal data.",
-    url: `${SITE_URL}/privacy`,
+    description: "Learn how My Prophetic Journal protects your spiritual content and personal data. Our privacy policy explains our commitment to treating your prophetic notes with reverence and respect.",
+    ogDescription: "Learn how My Prophetic Journal protects your spiritual content and personal data.",
   },
-};
+  es: {
+    title: "Política de privacidad",
+    description: "Cómo Mi Diario Profético protege tu contenido espiritual y tus datos personales, y nuestro compromiso de tratar tus notas proféticas con reverencia y respeto.",
+    ogDescription: "Cómo Mi Diario Profético protege tu contenido espiritual y tus datos personales.",
+  },
+} satisfies Record<Locale, { title: string; description: string; ogDescription: string }>;
 
-export default function PrivacyPolicy() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  const meta = META[lang];
+  return {
+    title: meta.title,
+    alternates: pageAlternates(lang, "/privacy"),
+    description: meta.description,
+    openGraph: {
+      title: meta.title,
+      description: meta.ogDescription,
+      url: `${SITE_URL}${localePath(lang, "/privacy")}`,
+      locale: ogLocale[lang],
+    },
+  };
+}
+
+export default async function PrivacyPage({ params }: Props) {
+  const { lang } = await params;
+  return lang === 'es' ? <SpanishPrivacyPolicy /> : <EnglishPrivacyPolicy />;
+}
+
+const BackArrow = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+  </svg>
+);
+
+/** Same look as the English page, rendered from the app's Spanish policy text. */
+function SpanishPrivacyPolicy() {
+  const home = localePath('es', '/');
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="bg-background/95 backdrop-blur-sm border-b border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <Link href={home} className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+            <BackArrow />
+            Volver al inicio
+          </Link>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="max-w-4xl mx-auto prose prose-lg">
+          {PRIVACY_ES.map((node, i) => {
+            switch (node.kind) {
+              case 'title':
+                return <h1 key={i} className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center">{node.text}</h1>;
+              case 'updated':
+                return <p key={i} className="text-sm text-foreground/60 text-center mb-6">{node.text}</p>;
+              case 'highlight':
+                return <p key={i} className="bg-primary/5 border border-primary/20 rounded-lg p-4 text-foreground/80 mb-8">{node.text}</p>;
+              case 'heading':
+                return <h2 key={i} className="text-2xl font-bold mt-8 mb-4 text-primary">{node.text}</h2>;
+              case 'subheading':
+                return <h3 key={i} className="text-xl font-semibold mb-3 text-secondary">{node.text}</h3>;
+              case 'body':
+                return <p key={i} className="text-foreground/80 mb-4">{node.text}</p>;
+              case 'quote':
+                return <blockquote key={i} className="border-l-4 border-primary pl-4 italic text-foreground/80 my-4">{node.text}</blockquote>;
+              case 'bullets':
+                return (
+                  <ul key={i} className="list-disc pl-6 mb-4 text-foreground/80 space-y-2">
+                    {node.items.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                );
+            }
+          })}
+
+          <div className="text-center mt-12 not-prose">
+            <Link href={home} className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+              <BackArrow />
+              Volver al inicio
+            </Link>
+          </div>
+        </div>
+      </main>
+
+      <footer className="bg-muted/30 border-t border-border py-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-foreground/60">© 2026 Mi Diario Profético. Todos los derechos reservados.</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+function EnglishPrivacyPolicy() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}

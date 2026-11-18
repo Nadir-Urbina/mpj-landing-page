@@ -1,21 +1,23 @@
-const ProblemSection = () => {
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/dictionaries';
+
+const DELAYS = ['', ' d1', ' d2'];
+
+const ProblemSection = ({ locale }: { locale: Locale }) => {
+  const t = getDictionary(locale).problem;
   return (
     <section className="problem section-pad">
       <div className="mpj-container">
         <div className="problem-grid">
-          <div className="problem-item reveal">
-            <p>You had a dream. By morning, half of it was gone.</p>
-          </div>
-          <div className="problem-item reveal d1">
-            <p>Someone spoke a word over you. You meant to write it down.</p>
-          </div>
-          <div className="problem-item reveal d2">
-            <p>You know God is speaking. But the moments keep slipping away.</p>
-          </div>
+          {t.lines.map((line, i) => (
+            <div key={line} className={`problem-item reveal${DELAYS[i]}`}>
+              <p>{line}</p>
+            </div>
+          ))}
         </div>
         <div className="problem-close reveal d2">
           <span>
-            My Prophetic Journal was built for <span className="accent">exactly this.</span>
+            {t.closeStart}<span className="accent">{t.closeAccent}</span>
           </span>
         </div>
       </div>

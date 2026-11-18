@@ -1,4 +1,7 @@
 import DownloadButton from "./DownloadButton";
+import { SIGN_IN_LINK } from "../lib/links";
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
 const Check = () => (
   <svg viewBox="0 0 24 24" fill="none">
@@ -6,46 +9,53 @@ const Check = () => (
   </svg>
 );
 
-const PricingSection = () => {
+const PricingSection = ({ locale }: { locale: Locale }) => {
+  const t = getDictionary(locale).pricing;
   return (
     <section className="pricing section-pad" id="pricing">
       <div className="mpj-container">
         <div className="section-head reveal" style={{ margin: '0 auto', textAlign: 'center' }}>
-          <div className="eyebrow">Start free, stay as long as you like</div>
-          <h2>Simple pricing for a lifelong practice.</h2>
+          <div className="eyebrow">{t.eyebrow}</div>
+          <h2>{t.title}</h2>
         </div>
         <div className="pricing-grid">
           <div className="price-card reveal">
-            <div className="price-name">Free</div>
+            <div className="price-name">{t.free.name}</div>
             <div className="price-amount">
-              <span className="num">$0</span>
-              <span className="per">forever</span>
+              <span className="num">{t.free.amount}</span>
+              <span className="per">{t.free.per}</span>
             </div>
-            <p className="price-tagline">Everything you need to start capturing what God is saying.</p>
+            <p className="price-tagline">{t.free.tagline}</p>
             <ul className="price-list">
-              <li><Check />Unlimited journal entries</li>
-              <li><Check />Capture by type — dreams, visions, words</li>
-              <li><Check />Remembrance Moments 5-day reminders</li>
+              {t.free.items.map((item) => (
+                <li key={item}><Check />{item}</li>
+              ))}
             </ul>
-            <DownloadButton className="btn btn-outline">Download Free</DownloadButton>
+            <div className="price-actions">
+              <DownloadButton className="btn btn-outline">{t.free.cta}</DownloadButton>
+              <a href={SIGN_IN_LINK} className="btn btn-text">{t.free.webCta} →</a>
+            </div>
           </div>
 
           <div className="price-card popular reveal d1">
-            <span className="popular-badge">Most Popular</span>
-            <div className="price-name">Premium</div>
+            <span className="popular-badge">{t.premium.badge}</span>
+            <div className="price-name">{t.premium.name}</div>
+            <div className="price-promo-tag">{t.premium.promoTag}</div>
             <div className="price-amount">
-              <span className="num">$4.99</span>
-              <span className="per">/ month</span>
+              <span className="num">{t.premium.amount}</span>
+              <span className="per">{t.premium.per}</span>
             </div>
-            <p className="price-tagline">
-              Go deeper with insight, patterns, and your prophetic community.
-            </p>
+            <p className="price-then">{t.premium.then}</p>
+            <p className="price-tagline">{t.premium.tagline}</p>
             <ul className="price-list">
-              <li><Check />Everything in Free</li>
-              <li><Check />AI Scripture suggestions &amp; pattern insight</li>
-              <li><Check />Prophetic Teams &amp; shared journals</li>
+              {t.premium.items.map((item) => (
+                <li key={item}><Check />{item}</li>
+              ))}
             </ul>
-            <DownloadButton className="btn btn-primary">Start with Premium</DownloadButton>
+            <div className="price-actions">
+              <DownloadButton className="btn btn-primary">{t.premium.cta}</DownloadButton>
+              <p className="price-note">{t.premium.note}</p>
+            </div>
           </div>
         </div>
       </div>

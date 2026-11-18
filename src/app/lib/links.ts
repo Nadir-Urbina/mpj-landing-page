@@ -1,6 +1,9 @@
 /** AppsFlyer smart link — routes to the App Store or Google Play based on the visitor's device. */
 export const DOWNLOAD_LINK = "https://click.mypropheticjournal.life/QeZx/rp902iiu";
 
+/** The web version of the app (Flutter web build); its root shows the sign-in screen. */
+export const SIGN_IN_LINK = "https://app.mypropheticjournal.life";
+
 /**
  * Canonical origin for the site, used for metadataBase, canonical URLs,
  * OpenGraph URLs, robots.txt and sitemap.xml.
