@@ -1,8 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
+import type { Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/dictionaries';
 
-const ContactSection = () => {
+const ContactSection = ({ locale }: { locale: Locale }) => {
+  const t = getDictionary(locale).contact;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,7 +29,7 @@ const ContactSection = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          subject: `Website message from ${formData.name}`,
+          subject: t.subject(formData.name),
         }),
       });
 
@@ -37,11 +40,12 @@ const ContactSection = () => {
         setFormData({ name: '', email: '', message: '' });
       } else {
         setStatus('error');
-        setErrorMessage(data.error || 'Something went wrong. Please try again.');
+        // The API's error text is English; Spanish visitors get the generic message.
+        setErrorMessage((locale === 'en' && data.error) || t.error);
       }
     } catch {
       setStatus('error');
-      setErrorMessage('Failed to send message. Please try again later.');
+      setErrorMessage(t.networkError);
     }
   };
 
@@ -50,12 +54,9 @@ const ContactSection = () => {
       <div className="mpj-container">
         <div className="contact-grid">
           <div className="contact-intro reveal">
-            <div className="eyebrow">We&apos;d love to hear from you</div>
-            <h2>Questions, prayer, or a story to share?</h2>
-            <p className="contact-lead">
-              Whether you&apos;re wondering how something works or you just want to tell us what God
-              is doing — there&apos;s a real person on the other side of this form.
-            </p>
+            <div className="eyebrow">{t.eyebrow}</div>
+            <h2>{t.title}</h2>
+            <p className="contact-lead">{t.lead}</p>
 
             <div className="contact-info">
               <div className="contact-info-card">
@@ -71,7 +72,7 @@ const ContactSection = () => {
                       support@mypropheticjournal.life
                     </a>
                   </h3>
-                  <p>We will be happy to help you with any questions you have.</p>
+                  <p>{t.infoText}</p>
                 </div>
               </div>
 
@@ -99,17 +100,17 @@ const ContactSection = () => {
                       <path d="m5 12.5 4.5 4.5L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
-                  <h3>Message sent!</h3>
-                  <p>Thank you for reaching out. We&apos;ll get back to you soon.</p>
+                  <h3>{t.successTitle}</h3>
+                  <p>{t.successBody}</p>
                   <button type="button" onClick={() => setStatus('idle')}>
-                    Send another message
+                    {t.sendAnother}
                   </button>
                 </div>
               </div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="field">
-                  <label htmlFor="name">Name</label>
+                  <label htmlFor="name">{t.name}</label>
                   <input
                     type="text"
                     id="name"
@@ -117,12 +118,12 @@ const ContactSection = () => {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Your name"
+                    placeholder={t.namePlaceholder}
                   />
                 </div>
 
                 <div className="field">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">{t.email}</label>
                   <input
                     type="email"
                     id="email"
@@ -130,12 +131,12 @@ const ContactSection = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="you@email.com"
+                    placeholder={t.emailPlaceholder}
                   />
                 </div>
 
                 <div className="field">
-                  <label htmlFor="message">Message</label>
+                  <label htmlFor="message">{t.message}</label>
                   <textarea
                     id="message"
                     name="message"
@@ -143,16 +144,16 @@ const ContactSection = () => {
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="How can we help, or what would you like to share?"
+                    placeholder={t.messagePlaceholder}
                   />
                 </div>
 
                 {status === 'error' && <div className="form-error">{errorMessage}</div>}
 
                 <button type="submit" className="btn btn-primary btn-send" disabled={status === 'loading'}>
-                  {status === 'loading' ? 'Sending…' : 'Send message'}
+                  {status === 'loading' ? t.sending : t.send}
                 </button>
-                <p className="form-note">We&apos;ll never share your email or send spam.</p>
+                <p className="form-note">{t.note}</p>
               </form>
             )}
           </div>

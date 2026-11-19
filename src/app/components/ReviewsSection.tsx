@@ -1,6 +1,8 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { testimonialsQuery, type Testimonial } from "@/sanity/lib/queries";
 import ReviewsMarquee from "./ReviewsMarquee";
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
 /** Shown until testimonials are added in Sanity. */
 const FALLBACK: Testimonial[] = [
@@ -28,7 +30,8 @@ const FALLBACK: Testimonial[] = [
   },
 ];
 
-const ReviewsSection = async () => {
+const ReviewsSection = async ({ locale }: { locale: Locale }) => {
+  const t = getDictionary(locale).reviews;
   const fetched = await sanityFetch<Testimonial[]>(testimonialsQuery, {}, []);
   const reviews = fetched.length > 0 ? fetched : FALLBACK;
 
@@ -36,12 +39,13 @@ const ReviewsSection = async () => {
     <section className="reviews section-pad">
       <div className="mpj-container">
         <div className="section-head reveal">
-          <div className="eyebrow">From the people using it</div>
-          <h2>What believers are saying.</h2>
+          <div className="eyebrow">{t.eyebrow}</div>
+          <h2>{t.title}</h2>
+          {t.note && <p className="reviews-note">{t.note}</p>}
         </div>
       </div>
 
-      <ReviewsMarquee reviews={reviews} />
+      <ReviewsMarquee reviews={reviews} locale={locale} />
     </section>
   );
 };

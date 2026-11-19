@@ -1,12 +1,16 @@
 import Link from 'next/link';
+import { localePath, type Locale } from '@/i18n/config';
+import { getDictionary } from '@/i18n/dictionaries';
 
-const FeaturesSection = () => {
+const FeaturesSection = ({ locale }: { locale: Locale }) => {
+  const t = getDictionary(locale).features;
+  const to = (path: string) => localePath(locale, path);
   return (
     <section className="features section-pad" id="features">
       <div className="mpj-container">
         <div className="section-head reveal">
-          <div className="eyebrow">Everything you receive, kept safe</div>
-          <h2>A home for the words you don&apos;t want to lose.</h2>
+          <div className="eyebrow">{t.eyebrow}</div>
+          <h2>{t.title}</h2>
         </div>
         <div className="features-grid">
           <div className="feature-card reveal">
@@ -17,20 +21,16 @@ const FeaturesSection = () => {
                 <path d="M6.5 10.5h7M6.5 14h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               </svg>
             </div>
-            <h3>Capture by type</h3>
-            <p>
-              Log every encounter the way it actually came to you. One tap files it as a Dream,
-              Vision, Prophetic Word, or Scripture Revelation.
-            </p>
+            <h3>{t.capture.title}</h3>
+            <p>{t.capture.body}</p>
             <div className="feature-types">
-              <span>Dream</span>
-              <span>Vision</span>
-              <span>Prophetic Word</span>
-              <span>Scripture Revelation</span>
+              {t.capture.types.map((type) => (
+                <span key={type}>{type}</span>
+              ))}
             </div>
             <p className="feature-link">
-              <Link href="/prophetic-dream-journal-app">Dream journaling →</Link>
-              <Link href="/prophetic-words-app">Prophetic words →</Link>
+              <Link href={to('/prophetic-dream-journal-app')}>{t.capture.dreamLink}</Link>
+              <Link href={to('/prophetic-words-app')}>{t.capture.wordsLink}</Link>
             </p>
           </div>
 
@@ -43,15 +43,13 @@ const FeaturesSection = () => {
               </svg>
             </div>
             <h3 className="feat-name">
-              Remembrance Moments <span className="feature-tag">5-day</span>
+              {t.remembrance.title} <span className="feature-tag">{t.remembrance.tag}</span>
             </h3>
             <p>
-              Inspired by the Hebrew call to remember &mdash; <em>zakar</em> &mdash; Remembrance
-              Moments gently resurfaces your past notes over five days. Nothing you receive gets
-              buried and forgotten.
+              {t.remembrance.bodyStart}<em>{t.remembrance.bodyWord}</em>{t.remembrance.bodyEnd}
             </p>
             <p className="feature-link">
-              <Link href="/features/remembrance-moments">What zakar means →</Link>
+              <Link href={to('/features/remembrance-moments')}>{t.remembrance.link}</Link>
             </p>
           </div>
 
@@ -64,11 +62,8 @@ const FeaturesSection = () => {
                 <path d="M7.6 8.6 10.6 15M16.4 8.6 13.4 15M8.2 7h7.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               </svg>
             </div>
-            <h3>Scripture &amp; pattern insight</h3>
-            <p>
-              Thoughtful AI surfaces Scripture that speaks to what you&apos;ve recorded. Over time it
-              reveals the recurring themes God is weaving across your whole journal.
-            </p>
+            <h3>{t.insight.title}</h3>
+            <p>{t.insight.body}</p>
           </div>
 
           <div className="feature-card reveal d1">
@@ -79,11 +74,8 @@ const FeaturesSection = () => {
                 <path d="M3.5 19c.4-3 2.7-4.8 5.5-4.8s5.1 1.8 5.5 4.8M15.5 14.8c2.2.2 3.8 1.7 4.1 4.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               </svg>
             </div>
-            <h3>Prophetic Teams</h3>
-            <p>
-              Invite the people you trust into a shared space. Share notes, confirm a word, and grow
-              together in discernment and accountability.
-            </p>
+            <h3>{t.teams.title}</h3>
+            <p>{t.teams.body}</p>
           </div>
         </div>
       </div>

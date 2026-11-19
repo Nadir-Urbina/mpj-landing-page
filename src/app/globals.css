@@ -250,6 +250,17 @@ section { position: relative; }
   box-shadow: 0 6px 16px rgba(216,162,91,0.35);
 }
 .btn-download-sm:hover { transform: translateY(-2px); background: var(--gold-soft); }
+/* Secondary header CTA: outlined, white over the dark hero, ink once scrolled. */
+.btn-signin-sm {
+  background: transparent;
+  color: #fff;
+  padding: 9px 18px;
+  font-size: 0.92rem;
+  border: 1.5px solid rgba(255,255,255,0.45);
+}
+.btn-signin-sm:hover { transform: translateY(-2px); border-color: #fff; background: rgba(255,255,255,0.08); }
+.site-header.scrolled .header-cta .btn-signin-sm { color: var(--ink); border-color: var(--line); }
+.site-header.scrolled .header-cta .btn-signin-sm:hover { border-color: var(--ink-soft); background: transparent; }
 
 /* Mobile nav toggle */
 .nav-toggle {
@@ -276,8 +287,29 @@ section { position: relative; }
   font-size: 1rem; font-weight: 500; color: var(--ink-soft);
   padding: 12px 0; border-bottom: 1px solid var(--line);
 }
-.mobile-menu nav a:last-child { border-bottom: none; }
+.mobile-menu nav a:last-child,
+.mobile-menu nav a.btn { border-bottom: none; }
 .mobile-menu .btn-download-sm { margin-top: 14px; justify-content: center; }
+/* `.mobile-menu nav a` would otherwise turn the gold button's label grey. */
+.mobile-menu nav a.btn-download-sm { color: #2a1c06; }
+
+/* Language switcher -------------------------------------------- */
+.lang-switch {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.9rem; font-weight: 500;
+  color: rgba(255,255,255,0.82);
+  transition: color .2s ease;
+}
+.lang-switch:hover { color: #fff; }
+.lang-switch svg { width: 17px; height: 17px; flex: none; }
+.lang-switch .lang-short { display: none; }
+.site-header.scrolled .lang-switch-header { color: var(--ink-soft); }
+.site-header.scrolled .lang-switch-header:hover { color: var(--ink); }
+.mobile-menu nav a.lang-switch-menu { color: var(--ink-soft); gap: 10px; }
+.mobile-menu nav a.btn-signin-sm {
+  justify-content: center; margin-top: 6px; padding: 9px 18px;
+  color: var(--ink); border: 1.5px solid var(--line);
+}
 
 /* ============================================================
    Hero
@@ -632,6 +664,44 @@ section { position: relative; }
 .price-card .btn { justify-content: center; width: 100%; }
 .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
 .btn-outline:hover { transform: translateY(-2px); border-color: var(--ink-soft); }
+.price-promo-tag {
+  align-self: flex-start;
+  margin-top: 14px;
+  font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 5px 11px; border-radius: 999px;
+  color: var(--royal); background: rgba(37,99,235,0.1);
+}
+.price-promo-tag + .price-amount { margin-top: 10px; }
+.price-then { color: var(--ink); font-size: 0.98rem; font-weight: 500; margin-bottom: 14px; }
+.price-actions { display: flex; flex-direction: column; gap: 10px; }
+.btn-text { background: transparent; color: var(--royal); padding: 8px 12px; font-size: 0.95rem; }
+.btn-text:hover { text-decoration: underline; text-underline-offset: 3px; }
+.price-note { color: var(--ink-faint); font-size: 0.82rem; line-height: 1.45; text-align: center; }
+
+/* "Or use it on the web →" beside/under the download badge (hero, final CTA). */
+.web-link {
+  display: inline-flex; align-items: center;
+  font-size: 0.98rem; font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  padding: 8px 4px;
+  text-decoration: underline; text-decoration-color: rgba(255,255,255,0.35);
+  text-underline-offset: 4px;
+  transition: color .2s ease, text-decoration-color .2s ease;
+}
+.web-link:hover { color: #fff; text-decoration-color: #fff; }
+.store-row:has(.web-link) { align-items: center; }
+
+.reviews-note { color: var(--ink-faint); font-size: 0.92rem; margin-top: 10px; }
+.blog-lang-tag {
+  display: inline-block; align-self: flex-start; margin-bottom: 8px;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 999px;
+  color: var(--ink-soft); background: var(--line);
+}
+.post-lang-note {
+  margin-bottom: 24px; padding: 12px 16px; border-radius: 12px;
+  background: rgba(37,99,235,0.07); color: var(--ink-soft); font-size: 0.95rem;
+}
 
 /* ============================================================
    Blog teaser
@@ -904,9 +974,26 @@ section { position: relative; }
   .contact-grid { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   .nav-toggle { display: inline-flex; }
+  .lang-switch-header .lang-full { display: none; }
+  .lang-switch-header .lang-short { display: inline; }
+  .header-cta .btn { white-space: nowrap; }
+}
+@media (max-width: 720px) {
+  /* Too tight beside the wordmark + Download button (esp. "Iniciar sesión");
+     it stays in the mobile menu. */
+  .header-cta .btn-signin-sm { display: none; }
 }
 @media (max-width: 560px) {
   .mpj-container { padding: 0 20px; }
+  /* Phones: the switcher moves into the menu (it's a full row there) and the
+     brand wraps to at most two lines instead of three. */
+  .header-cta .lang-switch-header { display: none; }
+  .header-inner { gap: 12px; }
+  .header-cta { gap: 10px; }
+  .brand { gap: 9px; min-width: 0; }
+  .brand .logo-mark { width: 34px; height: 34px; }
+  .brand .wordmark { font-size: 0.92rem; line-height: 1.2; }
+  .header-cta .btn-download-sm { padding: 9px 14px; font-size: 0.86rem; white-space: nowrap; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
 }
 

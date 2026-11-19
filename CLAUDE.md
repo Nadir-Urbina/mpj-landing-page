@@ -57,6 +57,14 @@ The landing page (`src/app/page.tsx`) is composed of sequential section componen
 - Pages: `/blog` (index, `src/app/blog/page.tsx`) and `/blog/[slug]` (post, Portable Text via `portableComponents.tsx`). The homepage teaser (`BlogSection`) pulls the latest 3 posts and falls back to static placeholders when none exist.
 - Required env (see `.env.local.example`): `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`. The whole blog layer no-ops (placeholders / empty states) until these are set, so builds never break.
 
+### Languages (English + Spanish)
+- English is served at the existing unprefixed URLs; Spanish ("Mi Diario Profético") lives under `/es`. All pages live in `src/app/[lang]/`, each language with its own root layout (`[lang]/layout.tsx` sets `<html lang>`); `src/app/studio/layout.tsx` is the Studio's separate root layout.
+- `src/middleware.ts` rewrites unprefixed requests to the internal `/en` tree, 308s `/en/...` back to the unprefixed URL, and on a first visit 307s browsers whose `Accept-Language` prefers Spanish to `/es/...`. The `NEXT_LOCALE` cookie (set by `LanguageSwitcher`) overrides detection. Crawlers without the header get English.
+- Shared/homepage copy: `src/i18n/dictionaries/en.ts` and `es.ts` (`es` is typed as `Dictionary`, so a missing translation is a type error). Long-form page copy (SEO pages, Remembrance Moments) sits in a `COPY: Record<Locale, ...>` object inside each page; inline emphasis/links use the `Rich` format from `components/RichText.tsx`.
+- Build internal links with `localePath(locale, "/path")` and page metadata with `pageAlternates(locale, "/path")` (canonical + hreflang) from `src/i18n/config.ts`.
+- Spanish terms follow the app's own translation (myPjFlutter `lib/l10n/app_es.arb`); Spanish Scripture quotes are RVR1960. The Spanish privacy policy (`[lang]/privacy/privacy-es.ts`) is copied verbatim from the app's reviewed text (`lib/pages/legal_document_es.dart`); update both together.
+- Blog posts have a `language` field in Sanity (missing = English). Each blog shows its own language's posts first, then the other language's tagged "En inglés"; a post's canonical is always its own language's URL. The RSS feed is English-only.
+
 ### Contact form
 - `ContactSection` posts to `src/app/api/contact/route.ts`, which emails via Resend. Requires `RESEND_API_KEY`; the route returns a graceful 500 if it's missing.
 

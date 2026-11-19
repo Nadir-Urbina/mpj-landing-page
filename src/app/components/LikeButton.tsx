@@ -2,12 +2,16 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+import type { Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+
 /**
  * Like button for a blog post. The count is fetched on mount rather than
  * server-rendered, because post pages are ISR-cached and a baked-in count
  * would be stale.
  */
-const LikeButton = ({ slug }: { slug: string }) => {
+const LikeButton = ({ slug, locale }: { slug: string; locale: Locale }) => {
+  const t = getDictionary(locale).likes;
   const [count, setCount] = useState<number | null>(null);
   const [liked, setLiked] = useState(false);
   const [enabled, setEnabled] = useState(true);
@@ -59,7 +63,7 @@ const LikeButton = ({ slug }: { slug: string }) => {
         onClick={like}
         disabled={liked || pending}
         aria-pressed={liked}
-        aria-label={liked ? "You found this encouraging" : "Mark this as encouraging"}
+        aria-label={liked ? t.likedAria : t.likeAria}
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path
@@ -70,10 +74,10 @@ const LikeButton = ({ slug }: { slug: string }) => {
             strokeLinejoin="round"
           />
         </svg>
-        <span>{liked ? "Encouraged" : "Encouraging"}</span>
+        <span>{liked ? t.encouraged : t.encouraging}</span>
       </button>
       <span className="like-count">
-        {count === null ? " " : `${count} ${count === 1 ? "person" : "people"} found this encouraging`}
+        {count === null ? " " : t.count(count)}
       </span>
     </div>
   );

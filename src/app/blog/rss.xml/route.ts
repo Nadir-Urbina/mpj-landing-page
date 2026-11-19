@@ -1,5 +1,5 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { allPostsQuery, type PostCard } from "@/sanity/lib/queries";
+import { englishPostsQuery, type PostCard } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/image";
 import { SITE_URL } from "@/app/lib/links";
 
@@ -49,7 +49,7 @@ function itemXml(post: PostCard): string {
 }
 
 export async function GET() {
-  const posts = await sanityFetch<PostCard[]>(allPostsQuery, {}, []);
+  const posts = await sanityFetch<PostCard[]>(englishPostsQuery, {}, []);
 
   const feedUrl = `${SITE_URL}/blog/rss.xml`;
   const items = posts.map(itemXml).join("\n");

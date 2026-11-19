@@ -4,10 +4,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import ScrollReveal from "../../components/ScrollReveal";
-import LikeButton from "../../components/LikeButton";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
+import ScrollReveal from "@/app/components/ScrollReveal";
+import LikeButton from "@/app/components/LikeButton";
 import { portableComponents } from "../portableComponents";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
@@ -16,29 +16,32 @@ import {
   postSlugsQuery,
   type Post,
 } from "@/sanity/lib/queries";
+import { localePath, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
 export const revalidate = 60;
 
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-US", {
+type Props = { params: Promise<{ lang: Locale; slug: string }> };
+
+const formatDate = (iso: string, dateLocale: string) =>
+  new Date(iso).toLocaleDateString(dateLocale, {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
+// Every post is pre-rendered under both languages: a Spanish-browser visitor
+// following a link to an English post lands on /es/blog/<slug> (Spanish site
+// chrome, a note that the article is in English, canonical to the original).
 export async function generateStaticParams() {
   const slugs = await sanityFetch<{ slug: string }[]>(postSlugsQuery, {}, []);
   return slugs.map((s) => ({ slug: s.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang, slug } = await params;
   const post = await sanityFetch<Post | null>(postBySlugQuery, { slug }, null);
-  if (!post) return { title: "Post not found" };
+  if (!post) return { title: getDictionary(lang).blog.notFound };
 
   const ogImage = post.coverImage
     ? urlForImage(post.coverImage).width(1200).height(630).fit("crop").url()
@@ -49,7 +52,9 @@ export async function generateMetadata({
     // push them past Google's ~60-character display limit.
     title: { absolute: post.title },
     description: post.excerpt,
-    alternates: { canonical: `/blog/${slug}` },
+    // Canonical is always the post's own language, so the copy shown under the
+    // other language's chrome isn't indexed as a duplicate.
+    alternates: { canonical: localePath(post.language, `/blog/${slug}`) },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -59,15 +64,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
+export default async function PostPage({ params }: Props) {
+  const { lang, slug } = await params;
+  const t = getDictionary(lang).blog;
   const post = await sanityFetch<Post | null>(postBySlugQuery, { slug }, null);
 
   if (!post) notFound();
+  const otherLanguage = post.language !== lang;
 
   // `fit("max")` scales down without cropping, so the whole cover is always
   // visible whatever aspect ratio was uploaded. Fall back to 2:1 for older
@@ -80,26 +83,33 @@ export default async function PostPage({
 
   return (
     <div className="mpj">
-      <Header />
+      <Header locale={lang} />
 
       <section className="page-hero">
         <div className="mpj-container">
-          <Link href="/blog" className="back-link">
-            ← Back to the journal
+          <Link href={localePath(lang, "/blog")} className="back-link">
+            {t.back}
           </Link>
-          {post.category && <div className="eyebrow on-dark">{post.category}</div>}
-          <h1 className="post-title">{post.title}</h1>
+          {post.category && (
+            <div className="eyebrow on-dark">{t.categories[post.category] ?? post.category}</div>
+          )}
+          <h1 className="post-title" lang={otherLanguage ? post.language : undefined}>
+            {post.title}
+          </h1>
           <div className="post-meta">
             {post.author && <span>{post.author}</span>}
             {post.author && <span aria-hidden="true">·</span>}
-            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, t.dateLocale)}</time>
           </div>
         </div>
       </section>
 
       <section className="article-wrap section-pad">
         <div className="mpj-container">
-          <article className="article">
+          <article className="article" lang={otherLanguage ? post.language : undefined}>
+            {otherLanguage && t.otherLanguageNote && (
+              <p className="post-lang-note" lang={lang}>{t.otherLanguageNote}</p>
+            )}
             {cover && (
               <div className="article-cover">
                 <Image
@@ -116,12 +126,12 @@ export default async function PostPage({
             {post.body && (
               <PortableText value={post.body} components={portableComponents} />
             )}
-            <LikeButton slug={slug} />
+            <LikeButton slug={slug} locale={lang} />
           </article>
         </div>
       </section>
 
-      <Footer />
+      <Footer locale={lang} />
       <ScrollReveal />
     </div>
   );
